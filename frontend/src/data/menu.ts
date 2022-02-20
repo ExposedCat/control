@@ -3,23 +3,27 @@ import { MenuEntryProps } from '../models/menu'
 const menuEntryList: MenuEntryProps[] = [
 	{
 		iconName: 'logo192.png',
-		label: 'Test',
-		id: 'test1'
+		label: 'Home',
+		id: 'home',
+		path: '/home'
 	},
 	{
 		iconName: 'logo192.png',
-		label: 'Test 2',
-		id: 'test2'
+		label: 'Home',
+		id: 'home-copy-1',
+		path: '/home1'
 	},
 	{
 		iconName: 'logo192.png',
-		label: 'Test 3',
-		id: 'test3'
+		label: 'Home',
+		id: 'home-copy-2',
+		path: '/home2'
 	},
 	{
 		iconName: 'logo192.png',
-		label: 'Test 4',
-		id: 'test4'
+		label: 'Home',
+		id: 'home-copy-3',
+		path: '/home3'
 	}
 ]
 

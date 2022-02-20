@@ -2,6 +2,7 @@ type MenuEntryProps = {
 	iconName: string
 	label: string
 	id: string
+	path: string
 }
 
 type MenuProps = {
