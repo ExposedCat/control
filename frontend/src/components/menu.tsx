@@ -14,7 +14,6 @@ class Menu extends Component<MenuProps> {
 					label={menuEntry.label}
 					id={menuEntry.id}
 					key={menuEntry.id}
-					path={menuEntry.path}
 				/>
 			))}
 		</div>
@@ -23,7 +22,7 @@ class Menu extends Component<MenuProps> {
 
 class MenuEntry extends Component<MenuEntryProps> {
 	render = (): ReactNode => (
-		<Link className='menuentry' id={this.props.id} to={this.props.path}>
+		<Link className='menuentry' id={this.props.id} to={`/${this.props.id}`}>
 			<img
 				className='menuentry-icon'
 				src={require(`../assets/icons/${this.props.iconName}`)}
