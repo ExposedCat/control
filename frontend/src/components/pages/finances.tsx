@@ -2,16 +2,44 @@ import '../../styles/finances.css'
 
 import { Component, ReactNode } from 'react'
 
-class Finances extends Component {
+import { FinancesData } from '../../models/finances'
+
+import { getUserFinancesData } from '../../api/finances'
+
+class Finances extends Component<{}, FinancesData> {
+	constructor(props: {}) {
+		super(props)
+		this.state = {
+			monthlyIncome: 0,
+			monthlyOutcome: 0,
+			dailyBudget: 0
+		}
+	}
+
+	async componentDidMount(): Promise<void> {
+		const response = await getUserFinancesData(1)
+		if (response.error) {
+			alert(response.errorMessage)
+		} else {
+			this.setState(response.data)
+		}
+	}
+
 	render = (): ReactNode => (
 		<>
 			<h1>Finances</h1>
-			<p>
-				Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-				Numquam, iste non. Quibusdam eum architecto impedit atque
-				accusamus repellendus vel error nam non, itaque sapiente ab?
-				Suscipit hic saepe odit voluptatem.
-			</p>
+			<div>
+				<p>Monthly income: </p>
+				<span id='monthly-income'>${this.state.monthlyIncome}</span>
+			</div>
+			<div>
+				<p>Monthly outcome: </p>
+				<span id='monthly-outcome'>${this.state.monthlyOutcome}</span>
+			</div>
+			<div>
+				<p>Daily budget: </p>
+				<span id='daily-budget'>${this.state.dailyBudget}</span>
+			</div>
 		</>
 	)
 }
