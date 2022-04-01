@@ -1,6 +1,11 @@
-import { Express } from 'express'
+import { Application } from 'express'
 
-import { getUserFinancesData } from '../controllers/index.js'
+import * as handlers from '../controllers/index.js'
+
+async function bindHandlers(app: Application) {
+	// Pages
+	app.get('/', handlers.home)
+	app.get('/error', handlers.error)
 
 async function bindHandlers(app: Express) {
 	app.get('/getUserFinancesData', getUserFinancesData)
