@@ -6,9 +6,10 @@ async function bindHandlers(app: Application) {
 	// Pages
 	app.get('/', handlers.home)
 	app.get('/error', handlers.error)
+	app.get('/signup', handlers.signUp)
 
-async function bindHandlers(app: Express) {
-	app.get('/getUserFinancesData', getUserFinancesData)
+	// Api
+	app.post('/api/signup', handlers.apiSignUp)
 }
 
 export { bindHandlers }
