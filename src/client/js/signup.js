@@ -1,22 +1,17 @@
-const $ = selector => document.querySelector(selector)
-
 $('#signup-form').addEventListener('submit', async event => {
 	event.preventDefault()
-	const apiResponse = await fetch('/api/signup', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
+	try {
+		const data = await apiCall('signup', {
 			email: $('#email').value,
 			password: $('#password').value
 		})
-	})
-
-	const { error, errorDescription, email } = await apiResponse.json()
-	if (error) {
-		alert(errorDescription)
-	} else {
-		alert(email)
+		if (data.success) {
+			location.assign('/login')
+		} else {
+			alert(`Error: ${data.message}`)
+		}
+	} catch (error) {
+		console.trace(error)
+		alert('Unexpected error')
 	}
 })
