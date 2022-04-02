@@ -1,5 +1,6 @@
 import { encode } from '../../services/encode.js'
 import { User } from '../../models/user.js'
+import jwt from 'jsonwebtoken'
 
 async function signUp(req, res) {
 	const { email, password } = req.body
@@ -10,6 +11,16 @@ async function signUp(req, res) {
 				email,
 				password: encodedPassword
 			})
+			// JWT
+			const maxAge = 3 * 60 * 60 // 3 hours
+			const payload = { id: user._id, email }
+			const options = { expiresIn: maxAge }
+			const token = jwt.sign(payload, process.env.JWT_SECRET, options)
+			res.cookie('jwt', token, {
+				httpOnly: true,
+				maxAge: maxAge * 1000
+			})
+			//
 			res.status(200).json({
 				success: true,
 				message: 'User successfully registered',

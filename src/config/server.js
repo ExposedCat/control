@@ -2,6 +2,7 @@ import path from 'path'
 import express from 'express'
 import session from 'express-session'
 import partials from 'express-partials'
+import cookieParser from 'cookie-parser'
 
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
@@ -11,6 +12,7 @@ const __dirname = dirname(__filename)
 function setupServer(sessionSecret) {
 	const app = express()
 
+	app.use(cookieParser())
 	app.use(
 		session({
 			secret: sessionSecret,

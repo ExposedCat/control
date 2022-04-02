@@ -1,7 +1,8 @@
 function profile(req, res) {
 	res.render('pages/profile', {
 		pageName: 'Profile',
-		email: 'req.user.email'
+		id: res.locals.user.id,
+		email: res.locals.user.email
 	})
 }
 
