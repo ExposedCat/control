@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { ConnectOptions } from 'mongodb'
+import { User } from '../models/user.js'
 
 function setupDatabase() {
 	mongoose.Promise = global.Promise
@@ -7,14 +7,19 @@ function setupDatabase() {
 	const connectOptions = {
 		useNewUrlParser: true,
 		useUnifiedTopology: true
-	} as ConnectOptions
+	}
 
 	return {
-		launchDatabase: (address: string, port: string, name: string) =>
-			mongoose.connect(
+		launchDatabase: async (address, port, name) => {
+			const connection = mongoose.connect(
 				`mongodb://${address}:${port}/${name}`,
 				connectOptions
 			)
+			// Clear database
+			await User.deleteMany()
+			//
+			return connection
+		}
 	}
 }
 

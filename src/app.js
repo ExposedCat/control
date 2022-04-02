@@ -3,12 +3,17 @@ import { setupDatabase } from './config/database.js'
 import { bindHandlers } from './config/bind-handlers.js'
 import { loadConfig } from './config/load-config.js'
 
-const { app, launchServer } = setupServer()
+loadConfig()
+
+if (!process.env.SESSION) {
+	console.error('ERROR: SESSION is not specified')
+	process.exit(5)
+}
+const { app, launchServer } = setupServer(process.env.SESSION)
 const { launchDatabase } = setupDatabase()
 
 bindHandlers(app)
 
-loadConfig()
 
 if (process.env.DB_NAME) {
 	if (process.env.DB_ADDRESS) {
@@ -32,7 +37,7 @@ if (process.env.DB_NAME) {
 }
 
 if (process.env.PORT) {
-	launchServer(Number(process.env.PORT))
+	launchServer(process.env.PORT, process.env.SESSION)
 } else {
 	console.error('ERROR: PORT is not specified')
 	process.exit(1)
