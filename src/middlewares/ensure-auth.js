@@ -1,23 +1,23 @@
 import jwt from 'jsonwebtoken'
+import { User } from '../models/user.js'
 
-function ensureAuthorized(req, res, next) {
+async function ensureAuthorized(req, res, next) {
 	const token = req.cookies.jwt
 	if (token) {
 		try {
-			const user = jwt.verify(token, process.env.JWT_SECRET)
-			res.locals.user = user
-			return next()
+			const { id } = jwt.verify(token, process.env.JWT_SECRET)
+			try {
+				const user = await User.findOne({ _id: id })
+				res.locals.user = user
+				return next()
+			} catch {
+				res.redirect('/api/logout')
+			}
 		} catch {
-			return res.status(401).json({
-				success: false,
-				message: 'Not authorized'
-			})
+			return res.redirect('/login')
 		}
 	} else {
-		return res.status(401).json({
-			success: false,
-			message: 'Not authorized'
-		})
+		return res.redirect('/login')
 	}
 }
 

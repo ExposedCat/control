@@ -11,6 +11,8 @@ async function bindHandlers(app) {
 	// Api
 	app.post('/api/login', handlers.apiLogin)
 	app.post('/api/signup', handlers.apiSignUp)
+	app.get('/api/logout', handlers.apiLogOut)
+	app.get('/api/getUser', handlers.apiGetUser)
 }
 
 export { bindHandlers }

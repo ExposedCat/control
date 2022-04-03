@@ -13,7 +13,7 @@ async function signUp(req, res) {
 			})
 			// JWT
 			const maxAge = 3 * 60 * 60 // 3 hours
-			const payload = { id: user._id, email }
+			const payload = { id: user._id }
 			const options = { expiresIn: maxAge }
 			const token = jwt.sign(payload, process.env.JWT_SECRET, options)
 			res.cookie('jwt', token, {

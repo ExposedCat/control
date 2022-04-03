@@ -6,7 +6,7 @@ $('#signup-form').addEventListener('submit', async event => {
 			password: $('#password').value
 		})
 		if (data.success) {
-			location.assign('/login')
+			location.assign('/profile')
 		} else {
 			alert(`Error: ${data.message}`)
 		}
