@@ -1,34 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<%- include('../partials/head') %>
-	</head>
-	<body>
-		<h1>Login</h1>
-		<form id="login-form">
-			<input
-				name="email"
-				type="email"
-				id="email"
-				placeholder="Email"
-				required
-			/>
-			<input
-				name="password"
-				type="password"
-				id="password"
-				placeholder="Password"
-				required
-			/>
-			<button id="#login" type="submit">Login</button>
-		</form>
-		<p>
-			<a href="/">Homepage</a>
-			|
-			<a href="/signup">Sign Up</a>
-		</p>
+<h1>Login</h1>
+<form id="login-form">
+	<input name="email" type="email" id="email" placeholder="Email" required />
+	<input
+		name="password"
+		type="password"
+		id="password"
+		placeholder="Password"
+		required
+	/>
+	<button id="#login" type="submit">Login</button>
+</form>
+<p>
+	<a href="/">Homepage</a>
+	|
+	<a href="/signup">Sign Up</a>
+</p>
 
-		<%- include('../partials/includes') %>
-		<script src="../../js/login.js"></script>
-	</body>
-</html>
+<%- contentFor('includes') %>
+<script src="../../js/login.js"></script>

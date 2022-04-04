@@ -1,8 +1,8 @@
 import path from 'path'
 import express from 'express'
 import session from 'express-session'
-import partials from 'express-partials'
 import cookieParser from 'cookie-parser'
+import expressLayouts from 'express-ejs-layouts'
 
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
@@ -22,9 +22,10 @@ function setupServer(sessionSecret) {
 		})
 	)
 
+	app.use(expressLayouts)
+	app.set('layout', 'partials/layout.ejs')
 	app.set('views', path.join(__dirname, '../client/views'))
 	app.set('view engine', 'ejs')
-	app.use(partials())
 
 	app.use(express.json())
 	app.use(express.urlencoded({ extended: true }))
